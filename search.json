@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Veronica Kopper",
+    "section": "",
+    "text": "I am a graduate student specializing in data science with a keen focus on the housing market domain. Concurrently, I maintain a profound interest in environmental data analysis and projects related to the circular economy.\nThis is Veronica Kopper website.\n\nplot(mtcars)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  }
+]
