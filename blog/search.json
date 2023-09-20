@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "Welcome to my data-centric blog, where I showcase an array of data projects spanning data visualization and analytics across my areas of interest."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Vero’s Data Blog",
+    "section": "",
+    "text": "This Blog is to add sazon to my data life\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nWelcome\n\n\n\n\n\n\n\nintro\n\n\n\n\n\n\n\n\n\n\n\nSep 15, 2023\n\n\nVeronica Kopper\n\n\n\n\n\n\n  \n\n\n\n\nAssignment 1\n\n\n\n\n\n\n\ncode\n\n\nart\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nSep 13, 2023\n\n\nVeronica Kopper\n\n\n\n\n\n\nNo matching items"
+  }
+]
