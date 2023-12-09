@@ -228,25 +228,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>owidall <span class="ot">=</span> <span class="fu">vroom</span>(<span class="st">"https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data.csv?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 362118 Columns: 67
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 362147 Columns: 67
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (4): iso_code, continent, location, tests_units
-dbl  (62): total_cases, new_cases, new_cases_smoothed, total_deaths, new_dea...
+dbl  (58): total_cases, new_cases, new_cases_smoothed, total_deaths, new_dea...
+lgl   (4): excess_mortality_cumulative_absolute, excess_mortality_cumulative...
 date  (1): date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>owidgerm <span class="ot">&lt;-</span> <span class="fu">subset</span>(owidall, location<span class="sc">==</span><span class="st">"Germany"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="dv">7</span>, <span class="st">"YlGn"</span>)                        <span class="co">#Picking the Palette</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cuts <span class="ot">&lt;-</span> <span class="fu">cut</span>(owidgerm<span class="sc">$</span>new_cases,<span class="dv">7</span>)                       <span class="co">#Cutting the data into 7 classes</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> palette[cuts]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(owidgerm, <span class="fu">aes</span>(<span class="at">x =</span> date))<span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> new_cases, <span class="at">col=</span>colors), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">show.legend =</span> F)<span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>owidgerm <span class="ot">&lt;-</span> <span class="fu">subset</span>(owidall, location<span class="sc">==</span><span class="st">"Germany"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">&lt;-</span> <span class="fu">brewer.pal</span>(<span class="dv">7</span>, <span class="st">"YlGn"</span>)                        <span class="co">#Picking the Palette</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>cuts <span class="ot">&lt;-</span> <span class="fu">cut</span>(owidgerm<span class="sc">$</span>new_cases,<span class="dv">7</span>)                       <span class="co">#Cutting the data into 7 classes</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> palette[cuts]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(owidgerm, <span class="fu">aes</span>(<span class="at">x =</span> date))<span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> new_cases, <span class="at">col=</span>colors), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">show.legend =</span> F)<span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -254,45 +261,52 @@ date  (1): date
 <p>Chart Four - Overlapping Column Chart</p>
 <p>Finally for this chart we compared the amount of vaccinations per continent for each year. The color of the bars corresponds to each year and the height is the logarithm of the number of vaccinations for each continent.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>owidall <span class="ot">=</span> <span class="fu">vroom</span>(<span class="st">"https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data.csv?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>owidall <span class="ot">=</span> <span class="fu">vroom</span>(<span class="st">"https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-data.csv?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 362118 Columns: 67
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 362147 Columns: 67
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (4): iso_code, continent, location, tests_units
-dbl  (62): total_cases, new_cases, new_cases_smoothed, total_deaths, new_dea...
+dbl  (58): total_cases, new_cases, new_cases_smoothed, total_deaths, new_dea...
+lgl   (4): excess_mortality_cumulative_absolute, excess_mortality_cumulative...
 date  (1): date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>owid20 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2020"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>owid21 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2021"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>owid22 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2022"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>owid23 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2023"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>vax20 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid20, <span class="at">FUN =</span> sum)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>vax21 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid21, <span class="at">FUN =</span> sum)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>vax22 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid22, <span class="at">FUN =</span> sum)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>vax23 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid23, <span class="at">FUN =</span> sum)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>all <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"continent"</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Africa"</span>,<span class="st">"Asia"</span>,<span class="st">"Europe"</span>,<span class="st">"N. America"</span>,<span class="st">"Oceania"</span>,<span class="st">"S. America"</span>),</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2020"</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1016774</span>,<span class="dv">316297</span>,<span class="dv">5785031</span>,<span class="dv">1</span>,<span class="dv">31136</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>all<span class="sc">$</span><span class="st">"2021"</span> <span class="ot">&lt;-</span> vax21<span class="sc">$</span>new_vaccinations</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>all<span class="sc">$</span><span class="st">"2022"</span> <span class="ot">&lt;-</span> vax22<span class="sc">$</span>new_vaccinations</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>all<span class="sc">$</span><span class="st">"2023"</span> <span class="ot">&lt;-</span> vax23<span class="sc">$</span>new_vaccinations</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(all) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"continent"</span>,<span class="dv">2020</span>,<span class="dv">2021</span>,<span class="dv">2022</span>,<span class="dv">2023</span>)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(all, <span class="fu">aes</span>(<span class="at">x =</span> continent)) <span class="sc">+</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2021"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#beaed4"</span>,    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.05</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2022"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#fdc086"</span>,  <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.10</span>),  <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2023"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#ffff99"</span>, <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.05</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2020"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#7fc97f"</span>,   <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.10</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Vaccinations"</span>)<span class="sc">+</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Continent"</span>)<span class="sc">+</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">315</span>, <span class="at">hjust =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>owid20 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2020"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>owid21 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2021"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>owid22 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2022"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>owid23 <span class="ot">=</span> <span class="fu">subset</span>(owidall, <span class="fu">format</span>(date, <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="st">"2023"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>vax20 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid20, <span class="at">FUN =</span> sum)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>vax21 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid21, <span class="at">FUN =</span> sum)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>vax22 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid22, <span class="at">FUN =</span> sum)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>vax23 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(new_vaccinations <span class="sc">~</span> continent, <span class="at">data =</span> owid23, <span class="at">FUN =</span> sum)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>all <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"continent"</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Africa"</span>,<span class="st">"Asia"</span>,<span class="st">"Europe"</span>,<span class="st">"N. America"</span>,<span class="st">"Oceania"</span>,<span class="st">"S. America"</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2020"</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1016774</span>,<span class="dv">316297</span>,<span class="dv">5785031</span>,<span class="dv">1</span>,<span class="dv">31136</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>all<span class="sc">$</span><span class="st">"2021"</span> <span class="ot">&lt;-</span> vax21<span class="sc">$</span>new_vaccinations</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>all<span class="sc">$</span><span class="st">"2022"</span> <span class="ot">&lt;-</span> vax22<span class="sc">$</span>new_vaccinations</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>all<span class="sc">$</span><span class="st">"2023"</span> <span class="ot">&lt;-</span> vax23<span class="sc">$</span>new_vaccinations</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(all) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"continent"</span>,<span class="dv">2020</span>,<span class="dv">2021</span>,<span class="dv">2022</span>,<span class="dv">2023</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(all, <span class="fu">aes</span>(<span class="at">x =</span> continent)) <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2021"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#beaed4"</span>,    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.05</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2022"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#fdc086"</span>,  <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.10</span>),  <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2023"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#ffff99"</span>, <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="fl">0.05</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(all<span class="sc">$</span><span class="st">"2020"</span>)), <span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"#7fc97f"</span>,   <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.10</span>), <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Number of Vaccinations"</span>)<span class="sc">+</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Continent"</span>)<span class="sc">+</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">315</span>, <span class="at">hjust =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Use of `all$"2021"` is discouraged.
 ℹ Use `2021` instead.</code></pre>
