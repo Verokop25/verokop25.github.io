@@ -1,0 +1,9 @@
+---
+title: "Poject Proposal"
+author: "Veronica Kopper"
+date: "2024-02-29"
+categories: [SQL,Power Point, Enviroment]
+image: "en.png"
+---
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRQV_xQUHUau5FMLeSdWhXdwZPTGkyyP9IkXShWblxzMaOVP6y2nUoAkoMKRqR1AQNiMt4EgxH2aBjF/embed?start=false&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
